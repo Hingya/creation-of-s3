@@ -1,7 +1,7 @@
-AWSTemplateFormatVersion: '2023-8-31'
+AWSTemplateFormatVersion: '2010-09-09'
 Description: Create bucket 
 Resources:
   MyS3Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: swapnil-hingmire
+      BucketName: swapnilhingmire342
