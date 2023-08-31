@@ -1,32 +1,25 @@
-name: combat1
+name: CloudFormation Deployment
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v2
 
-      #   - name: Upload to S3
-      #     run: |
-      #       aws s3 cp .github/workflows/anshal.txt s3://anshalkacft3123/
-      #     env:
-      #       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      #       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      #       AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-      #       AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+      - name: Set up AWS CLI
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Deploy CloudFormation stack
+      - name: Deploy CloudFormation Stack
         run: |
-          aws cloudformation deploy \
-            --stack-name creationstack \
-            --template-file .github\workflows\CFT.yml \
-            --capabilities CAPABILITY_NAMED_IAM
-
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws cloudformation deploy --stack-name MyStackName --template-file D:\PG-DBDA\git2\.github\workflows\CFT.yml --capabilities CAPABILITY_NAMED_IAM
