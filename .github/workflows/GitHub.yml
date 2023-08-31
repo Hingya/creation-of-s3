@@ -22,7 +22,7 @@ jobs:
         run: |
           aws cloudformation deploy \
             --stack-name creationstack \
-            --template-file .github\workflows\CFT.yml \
+            --template-file .D:\PG-DBDA\git2\.github\workflows\GitHub.yml \
             --capabilities CAPABILITY_NAMED_IAM
 
         env:
